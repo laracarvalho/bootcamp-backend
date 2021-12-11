@@ -1,6 +1,7 @@
 import { Document, Schema, model } from 'mongoose';
+import bcryptjs from 'bcryptjs';
 
-interface UserDocument {
+interface UserDocument extends Document {
     name: string;
     email: string;
     password: string;
@@ -27,6 +28,26 @@ const UserSchema = new Schema(
         timestamps: true
     }
 );
+
+UserSchema.pre('save', async function(next) {
+    const user = this as UserDocument;
+
+    if (!user.isModified('password')) {
+        return next();
+    }
+
+    const salt = await bcryptjs.genSalt(12);
+    const hash = await bcryptjs.hashSync(user.password, salt);
+    user.password = hash;
+
+    return next();
+});
+
+UserSchema.methods.comparePassword = async function(preHashPassword: string) {
+    const user = this as UserDocument;
+
+    return bcryptjs.compare(preHashPassword, user.password).catch((error) => false);
+};
 
 const User = model<UserDocument>("User", UserSchema);
 

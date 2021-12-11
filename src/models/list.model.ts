@@ -1,4 +1,4 @@
-import { Document, Schema, model } from 'mongoose';
+import { Document, Schema, model, SchemaTypes } from 'mongoose';
 
 interface ListDocument {
     user_id: string;
@@ -8,11 +8,11 @@ interface ListDocument {
 const ListSchema = new Schema(
     {
         user_id: {
-            type: String,
+            type: SchemaTypes.ObjectId,
             required: true,
         },
         movie_id: {
-            type: String,
+            type: SchemaTypes.ObjectId,
             required: true,
         }
     },
