@@ -5,6 +5,25 @@ import { ENV_VARS } from '../index';
 
 const token_secret = process.env.TOKEN_SECRET;
 
+function index(req: Request, res: Response) {
+
+    if (!req.headers.authorization) {
+        return res.status(401).json({
+            error: 'Usuário não autorizado '
+        });
+    }
+
+    if (!req.user) {
+        return res.status(401).json({
+            error: 'Usuário não autorizado '
+        });
+    }
+
+    return res.status(200).json({
+        userId: req.user
+    })
+}
+
 async function create(req: Request, res: Response) {
     const { email, password } = req.body;
 
@@ -54,4 +73,4 @@ function createAccessToken(userId: string) {
     return accessToken;
 }
 
-export { create };
+export { create, index };
