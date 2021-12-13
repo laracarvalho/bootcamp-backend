@@ -15,11 +15,13 @@ apiRouter.get('/', (req, res) => {
 /* ROTAS DE USUÁRIO */
 
 apiRouter.get('/users/id/:id', userController.view);
+apiRouter.post('/users/new', userController.create);
 apiRouter.delete('/users/destroy/:id', userController.destroy);
+
 
 /* ROTAS DE SESSÃO */
 
-apiRouter.post('/users/new', sessionController.create);
+apiRouter.post('/session/new', sessionController.create);
 
 /* ROTAS DE FILME */
 
