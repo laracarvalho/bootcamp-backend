@@ -103,4 +103,4 @@ function bulkCreate() {
 }
 
 
-export { movieFetcher }
+export { movieFetcher, bulkCreate }

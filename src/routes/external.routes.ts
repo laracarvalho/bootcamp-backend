@@ -1,8 +1,10 @@
 import { Router } from 'express';
-import { movieFetcher } from '../external/movieFetcher';
+import { movieFetcher, bulkCreate } from '../external/movieFetcher';
 
 const extRouter = Router();
 
 extRouter.get('/external', movieFetcher);
+
+extRouter.post('/external/createBulk', bulkCreate);
 
 export { extRouter };
