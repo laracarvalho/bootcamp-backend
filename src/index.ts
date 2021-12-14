@@ -2,12 +2,14 @@ import dotenv from 'dotenv';
 import express from 'express';
 import mongoose from 'mongoose';
 import { apiRouter } from './routes/api.routes';
+import { extRouter } from './routes/external.routes';
 
 dotenv.config();
 
 const app = express();
 app.use(express.json());
 app.use(apiRouter);
+app.use(extRouter);
 
 const ENV_VARS = {
     port: process.env.PORT,

@@ -21,7 +21,7 @@ function index(req: Request, res: Response) {
 
     return res.status(200).json({
         userId: req.user
-    })
+    });
 }
 
 async function create(req: Request, res: Response) {
