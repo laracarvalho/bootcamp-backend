@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import fs from 'fs';
 import axios from 'axios';
+import { Movie } from '../models/movie.model';
 
 const URL_MOVIES = 'https://api.themoviedb.org/3/trending/all/week?api_key=8c9751844a68e8e7105d68bd90f6eb25';
 
@@ -98,8 +99,16 @@ function writeToJson(array: Object[]) {
     fileSteam.end();
 }
 
-function bulkCreate() {
-    console.log('Criar em batch');
+async function bulkCreate(req: Request, res: Response) {
+    const { filePath } = req.body;
+
+    const array = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+
+    const movies = await Movie.insertMany(array).catch(error => {
+        return res.status(500).json(error);
+    });
+
+    return res.status(201).json(movies);
 }
 
 
