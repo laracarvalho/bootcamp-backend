@@ -36,9 +36,9 @@ apiRouter.post('/movies/new', movieController.create);
 
 /* ROTAS DE LISTA */
 
-apiRouter.get('/list', listController.index);
-apiRouter.post('/list/add/:id', listController.add);
-apiRouter.delete('/list/remove/:id', listController.remove);
+apiRouter.get('/list', authorize, listController.index);
+apiRouter.post('/list/add/:id', authorize, listController.add);
+apiRouter.delete('/list/remove/:id', authorize, listController.remove);
 
 
 export { apiRouter };
