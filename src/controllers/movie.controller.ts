@@ -3,13 +3,7 @@ import { Movie } from '../models/movie.model';
 import { paginate } from '../middlewares/pagination';
 
 function index(req: Request, res: Response) {
-    let query: string = '';
-
-    console.log(req.query.page);
-
-    if (req.query.page) {
-        let query = req.query?.page;
-    }
+    const page: string = req.query.page as string;
 
     Movie.find((error, result) => {
         if (error) {
@@ -19,7 +13,7 @@ function index(req: Request, res: Response) {
         }
 
         return res.status(201).json(
-            paginate(result, 2, parseInt(query))
+            paginate(result, 10, parseInt(page))
         );
     }); 
 }
