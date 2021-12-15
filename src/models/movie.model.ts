@@ -37,10 +37,6 @@ const MovieSchema = new Schema(
     },
     {
         timestamps: true
-        /*
-        createdAt: Date
-        updatedAt: Date
-        */
     }
 );
 

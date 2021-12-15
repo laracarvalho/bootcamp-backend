@@ -2,6 +2,7 @@ import { Router } from 'express';
 import * as userController from '../controllers/user.controller';
 import * as sessionController from '../controllers/session.controller';
 import * as movieController from '../controllers/movie.controller';
+import * as listController from '../controllers/list.controller';
 import { authorize } from '../middlewares/auth';
 
 const apiRouter = Router();
@@ -34,5 +35,10 @@ apiRouter.get('/movies/search/:search', movieController.search);
 apiRouter.post('/movies/new', movieController.create);
 
 /* ROTAS DE LISTA */
+
+apiRouter.get('/list', listController.index);
+apiRouter.post('/list/add/:id', listController.add);
+apiRouter.delete('/list/remove/:id', listController.remove);
+
 
 export { apiRouter };
