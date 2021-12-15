@@ -63,7 +63,9 @@ function view(req: Request, res: Response) {
 async function search(req: Request, res: Response) {
     const { search } = req.params;
 
-    const result = await Movie.find({ $or: [{ name: search }, { description: search }] }).catch(error => {
+    const regex = new RegExp(search, 'gi');
+
+    const result = await Movie.find({ name: regex }).catch(error => {
         console.log(error);
 
         return res.status(500).json({
