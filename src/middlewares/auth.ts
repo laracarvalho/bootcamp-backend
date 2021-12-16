@@ -30,6 +30,7 @@ function authorize(req: Request, res: Response, next: NextFunction) {
                     error: 'Não autorizado'
                 });
             }
+            
             req.user = id;
             return next();
         }
