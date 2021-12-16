@@ -52,7 +52,7 @@ async function add(req: Request, res: Response) {
         });
     }
 
-    const insideList = await List.findOne({ movie_id: id });
+    const insideList = await List.findOne({ movie_id: id, user_id: req.user });
 
     if (insideList) {
         return res.status(401).json({
